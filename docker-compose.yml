@@ -1,0 +1,28 @@
+version: "2"
+services:
+  haproxy:
+    build:
+      context: .
+    environment:
+      - CONSUL=consul
+    ports:
+      - "80:80"
+    labels:
+      - triton.cns.services=haproxy
+  consul:
+    image: progrium/consul:latest
+    command: -server -bootstrap -ui-dir /ui
+    restart: always
+    ports:
+      - 8500
+    expose:
+      - 53
+      - 8300
+      - 8301
+      - 8302
+      - 8400
+      - 8500
+    dns:
+      - 127.0.0.1
+    labels:
+      - triton.cns.services=consul

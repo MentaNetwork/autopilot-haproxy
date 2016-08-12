@@ -1,0 +1,34 @@
+# To test changes in this file, run the following
+# docker run -it --rm --name haproxy-syntax-check haproxy:1.5 haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg
+
+# TODO:
+# - rate limit with CloudFlare's IPs whitelisted
+# - 0 downtime reloads with iptables
+
+global
+    # debug
+    spread-checks 4
+    tune.maxrewrite 1024
+    tune.ssl.default-dh-param 2048
+
+defaults
+    mode http
+    # https://support.cloudflare.com/hc/en-us/articles/212794707
+    timeout client 300000
+    timeout connect 300000
+    timeout server 300000
+
+listen http-in
+    # The server values are populated with consul-template by containerpilot
+    bind :80{{range service "website"}}
+    server {{.ID}} {{.Address}}:{{.Port}} maxconn 32{{end}}
+    errorfile 503 /etc/haproxy/errorfiles/503.http
+
+listen stats
+    # To view stats in csv, use /_check/haproxy-stats;csv
+    bind :9000
+    stats enable
+    stats hide-version
+    stats realm Haproxy\ Statistics
+    stats uri /_check/haproxy-stats
+    stats auth "${HAPROXY_STATS_AUTH}"

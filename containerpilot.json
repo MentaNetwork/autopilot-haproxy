@@ -1,0 +1,23 @@
+{
+  "logging": {
+    "level": "WARN"
+  },
+  "consul": "{{ .CONSUL }}:8500",
+  "preStart": "sh /usr/local/bin/manage.sh preStart",
+  "services": [
+    {
+      "name": "haproxy",
+      "port": 80,
+      "health": "curl --fail -s http://localhost/",
+      "poll": 3,
+      "ttl": 10
+    }
+  ],
+  "backends": [
+    {
+      "name": "website",
+      "poll": 3,
+      "onChange": "sh /usr/local/bin/manage.sh onChange"
+    }
+  ]
+}

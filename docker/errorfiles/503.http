@@ -1,0 +1,15 @@
+HTTP/1.0 503 Service Unavailable
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html; charset=utf-8
+
+<!doctype html>
+<html>
+    <head>
+        <title>Error</title>
+    </head>
+    <body style="font-family: Helvetica">
+        <h1>503 - We'll be back shortly.</h1>
+        <h3>Please try again in a few seconds.</h3>
+    </body>
+</html>
