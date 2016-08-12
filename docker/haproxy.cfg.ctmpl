@@ -20,7 +20,7 @@ defaults
 
 listen http-in
     # The server values are populated with consul-template by containerpilot
-    bind :80{{range service "website"}}
+    bind :80{{range service "frontend"}}
     server {{.ID}} {{.Address}}:{{.Port}} maxconn 32{{end}}
     errorfile 503 /etc/haproxy/errorfiles/503.http
 

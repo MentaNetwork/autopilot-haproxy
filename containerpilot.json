@@ -15,7 +15,7 @@
   ],
   "backends": [
     {
-      "name": "website",
+      "name": "frontend",
       "poll": 3,
       "onChange": "sh /usr/local/bin/manage.sh onChange"
     }

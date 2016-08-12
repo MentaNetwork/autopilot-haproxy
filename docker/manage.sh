@@ -31,7 +31,7 @@ onChange() {
         -once \
         -dedup \
         -consul $CONSUL:8500 \
-        -template '/etc/haproxy/haproxy.cfg.ctmpl:/etc/haproxy/haproxy.cfg:sh /usr/local/bin/reload.sh reload'
+        -template '/etc/haproxy/haproxy.cfg.ctmpl:/etc/haproxy/haproxy.cfg:sh /usr/local/bin/manage.sh reload'
     info 'onChange template done.'
 }
 
