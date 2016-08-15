@@ -8,7 +8,7 @@
     {
       "name": "haproxy",
       "port": 80,
-      "health": "curl --fail -s http://localhost/",
+      "health": "curl --fail -s http://localhost/?_check-haproxy-health",
       "poll": 3,
       "ttl": 10
     }
