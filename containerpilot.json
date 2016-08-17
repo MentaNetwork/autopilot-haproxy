@@ -6,7 +6,7 @@
   "preStart": "sh /usr/local/bin/manage.sh preStart",
   "services": [
     {
-      "name": "haproxy",
+      "name": "loadbalancer",
       "port": 80,
       "health": "curl --fail -s http://localhost/?_check-haproxy-health",
       "poll": 3,
